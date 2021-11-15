@@ -2,6 +2,7 @@ package com.koona.dvdstore.web.controller;
 
 import com.koona.dvdstore.entity.Movie;
 import com.koona.dvdstore.service.MovieServiceInterface;
+import com.koona.dvdstore.web.form.MovieForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class HomeController {
     }
 
     @GetMapping("/add-movie-form")
-    public String displayMovieForm(@ModelAttribute Movie movie) {
+    public String displayMovieForm(@ModelAttribute MovieForm movieForm) {
         return "add-movie-form";
     }
 }

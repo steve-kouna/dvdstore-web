@@ -8,9 +8,13 @@ package com.koona.dvdstore.web.controller;
 import com.koona.dvdstore.entity.Movie;
 import com.koona.dvdstore.service.MovieServiceInterface;
 import java.util.Scanner;
+
+import com.koona.dvdstore.web.form.MovieForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -71,7 +75,17 @@ public class MovieController {
     }
 
     @PostMapping("")
-    public String addMovie(@ModelAttribute Movie movie) {
+    public String addMovie(@Validated @ModelAttribute MovieForm movieForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()){
+            return "add-movie-form";
+        }
+
+        Movie movie = new Movie();
+        movie.setGenre(movieForm.getGenre());
+        movie.setDescription(movieForm.getDescription());
+        movie.setTitle(movieForm.getTitle());
+
         movieService.registerMovie(movie);
         return "movie-added";
     }

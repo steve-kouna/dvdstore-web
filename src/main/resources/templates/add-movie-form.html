@@ -6,12 +6,21 @@
 </head>
 <body>
 <h1>Ajouter le film</h1>
-<form th:action="@{/movie}" method="post" th:object="${movie}">
+<form th:action="@{/movie}" method="post" th:object="${movieForm}">
     <label>
         Le titre : <input type="text" th:field="*{title}">
     </label><br>
     <label>
-        Le genre : <input type="text" th:field="*{genre}">
+        Le genre :
+        <select th:field="*{genre}">
+            <option th:value="COMEDIE" th:text="Comédie"></option>
+            <option th:value="HORREUR" th:text="Horreur"></option>
+            <option th:value="THRILLER" th:text="Thriller"></option>
+            <option th:value="ACTION" th:text="Action"></option>
+            <option th:value="ROMANTIQUE" th:text="Romantique"></option>
+            <option th:value="DRAME" th:text="Drame"></option>
+            <option th:value="ANIMATION" th:text="Animation"></option>
+        </select>
     </label><br>
     <label>
         Le description : <textarea th:field="*{description}"></textarea>
