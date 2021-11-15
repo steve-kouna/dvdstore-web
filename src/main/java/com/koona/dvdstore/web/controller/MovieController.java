@@ -11,8 +11,7 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -64,10 +63,17 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public String displayMovieCard(@PathVariable("id") Long id, Model model) {
         System.out.println("la methode display movie card invoquee");
         model.addAttribute("movie", movieService.getMovieId(id));
         return "movie-details";
     }
+
+    @PostMapping("")
+    public String addMovie(@ModelAttribute Movie movie) {
+        movieService.registerMovie(movie);
+        return "movie-added";
+    }
+
 }
