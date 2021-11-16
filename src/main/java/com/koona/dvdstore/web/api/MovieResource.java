@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.koona.dvdstore.web.controller;
+package com.koona.dvdstore.web.api;
 
 import com.koona.dvdstore.entity.Movie;
 import com.koona.dvdstore.service.MovieServiceInterface;
-import java.util.Scanner;
-
 import com.koona.dvdstore.web.form.MovieForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +15,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Scanner;
+
 /**
  *
  * @author Steve KOUNA
  */
-@Controller
+@RestController
 @RequestMapping("/movie")
-public class MovieController {
+public class MovieResource {
     
     @Autowired
     private MovieServiceInterface movieService;
@@ -66,31 +67,28 @@ public class MovieController {
     public void setMovieService(MovieServiceInterface movieService) {
         this.movieService = movieService;
     }
-/*
-    @GetMapping("/{id}")
-    public String displayMovieCard(@PathVariable("id") Long id, Model model) {
-        System.out.println("la methode display movie card invoquee");
-        model.addAttribute("movie", movieService.getMovieId(id));
-        return "movie-details";
+
+
+    @GetMapping
+    public List<Movie> getMovies() {
+        System.out.println("La methode display home a ete invoquee !");
+        return movieService.getMovieList();
     }
 
+    @GetMapping("/{id}")
+    public Movie getMovie(@PathVariable("id") Long id) {
+        System.out.println("la methode display movie card invoquee");
+        return movieService.getMovieId(id);
+    }
 
-    @PostMapping("")
-    public String addMovie(@Validated @ModelAttribute MovieForm movieForm, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()){
-            return "add-movie-form";
-        }
-
+    @PostMapping
+    public Movie postMovie(@RequestBody MovieForm movieForm) {
         Movie movie = new Movie();
         movie.setGenre(movieForm.getGenre());
         movie.setDescription(movieForm.getDescription());
         movie.setTitle(movieForm.getTitle());
 
-        movieService.registerMovie(movie);
-        return "movie-added";
+        return movieService.registerMovie(movie);
     }
-
- */
 
 }
