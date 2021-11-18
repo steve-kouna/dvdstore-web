@@ -26,7 +26,7 @@ public class HomeController {
     @GetMapping("/home")
     public String displayHome(Model model) {
         System.out.println("La methode display home a ete invoquee !");
-        model.addAttribute("movies", movieService.getMovieList());
+//        model.addAttribute("movies", movieService.getMovieList());
 
         return "dvdstore-home";
     }

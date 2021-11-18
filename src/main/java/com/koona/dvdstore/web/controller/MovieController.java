@@ -67,15 +67,17 @@ public class MovieController {
         this.movieService = movieService;
     }
 /*
+
     @GetMapping("/{id}")
     public String displayMovieCard(@PathVariable("id") Long id, Model model) {
         System.out.println("la methode display movie card invoquee");
         model.addAttribute("movie", movieService.getMovieId(id));
         return "movie-details";
     }
+*/
 
 
-    @PostMapping("")
+    @PostMapping("add")
     public String addMovie(@Validated @ModelAttribute MovieForm movieForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()){
@@ -90,7 +92,5 @@ public class MovieController {
         movieService.registerMovie(movie);
         return "movie-added";
     }
-
- */
 
 }
