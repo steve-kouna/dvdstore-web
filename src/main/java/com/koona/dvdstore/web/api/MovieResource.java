@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -70,13 +71,13 @@ public class MovieResource {
 
 
     @GetMapping
-    public List<Movie> getMovies() {
+    public Iterable<Movie> getMovies() {
         System.out.println("La methode display home a ete invoquee !");
         return movieService.getMovieList();
     }
 
     @GetMapping("/{id}")
-    public Movie getMovie(@PathVariable("id") Long id) {
+    public Optional<Movie> getMovie(@PathVariable("id") Long id) {
         System.out.println("la methode display movie card invoquee");
         return movieService.getMovieId(id);
     }
