@@ -77,7 +77,7 @@ public class MovieResource {
     }
 
     @GetMapping("/{id}")
-    public Optional<Movie> getMovie(@PathVariable("id") Long id) {
+    public Movie getMovie(@PathVariable("id") Long id) {
         System.out.println("la methode display movie card invoquee");
         return movieService.getMovieId(id);
     }
